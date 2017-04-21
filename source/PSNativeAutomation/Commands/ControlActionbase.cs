@@ -8,7 +8,7 @@ using System.Windows.Automation;
 
 namespace PSNativeAutomation.Commands
 {
-    public class InvokeBaseCommand : PSCmdlet
+    public class ControlActionBase : PSCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public AutomationElement Element

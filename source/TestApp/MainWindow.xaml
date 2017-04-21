@@ -1,0 +1,30 @@
+﻿<Window x:Class="TestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestApp"
+        mc:Ignorable="d"
+        Title="TestApp" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+    <DockPanel LastChildFill="False">
+        <ListBox Name="ListBox" SelectionMode="Multiple" Margin="5">
+            <ListBoxItem Content="ListItem1" />
+            <ListBoxItem Content="ListItem2" />
+            <ListBoxItem Content="ListItem3" />
+            <ListBoxItem Content="ListItem4" />
+        </ListBox>
+
+        <StackPanel Margin="5">
+            <Button Name="ButtonTest" Content="Test Button" Padding="5" PreviewMouseUp="ButtonTest_MouseUp" />
+            <TextBlock Name="TextButtonCoord" />
+            <TextBlock Name="TextButtonButton" />
+            <TextBlock Name="TextButtonModifier" />
+
+            <CheckBox Name="CheckBox" Content="Test Checkbox" IsThreeState="True" />
+
+            <TextBox Name="TextBlox" />
+
+            <TextBlock Name="TextBlock" Text="Test TextBlock" />
+        </StackPanel>
+    </DockPanel>
+</Window>

@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,15 +44,26 @@
     <Reference Include="UIAutomationClient" />
     <Reference Include="System.Management.Automation" />
     <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\GetBaseControlCommand.cs" />
+    <Compile Include="Commands\GetControlBase.cs" />
     <Compile Include="Commands\GetControlCommand.cs" />
     <Compile Include="Commands\GetDesktopCommand.cs" />
+    <Compile Include="Commands\GetToggleStateCommand.cs" />
+    <Compile Include="Commands\GetValueCommand.cs" />
     <Compile Include="Commands\GetWindowCommand.cs" />
-    <Compile Include="Commands\InvokeBaseCommand.cs" />
+    <Compile Include="Commands\ControlActionBase.cs" />
+    <Compile Include="Commands\GetWindowState.cs" />
     <Compile Include="Commands\InvokeClickCommand.cs" />
     <Compile Include="Commands\InvokePatternCommand.cs" />
+    <Compile Include="Commands\InvokeWindowPatternCommand.cs" />
+    <Compile Include="Commands\SendKeysCommand.cs" />
+    <Compile Include="Commands\RemoveSelectionCommand.cs" />
+    <Compile Include="Commands\SetFocusCommand.cs" />
+    <Compile Include="Commands\SetSelectionCommand.cs" />
+    <Compile Include="Commands\SetToggleCommand.cs" />
+    <Compile Include="Commands\SetValueCommand.cs" />
     <Compile Include="ErrorHandler.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="NativeTypes.cs" />

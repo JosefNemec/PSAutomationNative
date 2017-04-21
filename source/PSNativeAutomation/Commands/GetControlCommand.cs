@@ -9,7 +9,7 @@ using System.Windows.Automation;
 namespace PSNativeAutomation.Commands
 {
     [Cmdlet(VerbsCommon.Get, "UIControl")]
-    public class GetControlCommand : GetBaseControlCommand
+    public class GetControlCommand : GetControlBase
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         public override AutomationElement Parent

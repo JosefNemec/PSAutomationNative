@@ -8,15 +8,21 @@ using System.Windows.Automation;
 
 namespace PSNativeAutomation.Commands
 {
-    [Cmdlet(VerbsLifecycle.Invoke, "UIInvokePattern")]
-    public class InvokeInvokePatternCommand : ControlActionBase
+    [Cmdlet(VerbsCommon.Set, "UIValue")]
+    public class SetValueCommand : ControlActionBase
     {
+        [Parameter(Mandatory = true, Position = 0)]
+        public string Value
+        {
+            get; set;
+        }
+
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
 
-            var pattern = Element.GetCurrentPattern(InvokePattern.Pattern) as InvokePattern;
-            pattern.Invoke();
+            var pattern = Element.GetCurrentPattern(ValuePattern.Pattern) as ValuePattern;
+            pattern.SetValue(Value);
         }
     }
 }

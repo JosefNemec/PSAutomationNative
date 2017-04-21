@@ -8,7 +8,7 @@ using System.Windows.Automation;
 
 namespace PSNativeAutomation.Commands
 {
-    public class GetBaseControlCommand : PSCmdlet
+    public class GetControlBase : PSCmdlet
     {
         [Parameter()]
         public virtual AutomationElement Parent
@@ -16,15 +16,15 @@ namespace PSNativeAutomation.Commands
             get; set;
         }
 
-        [Parameter()]
-        public TreeScope Scope
+        [Parameter(Position = 0)]
+        [Alias("AutoID")]
+        public string AutomationId
         {
             get; set;
         }
 
         [Parameter()]
-        [Alias("AutoID")]
-        public string AutomationId
+        public TreeScope Scope
         {
             get; set;
         }

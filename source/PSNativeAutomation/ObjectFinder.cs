@@ -11,7 +11,7 @@ namespace PSNativeAutomation
 {
     public class ObjectFinder
     {
-        private static bool isStringMatching(string source, string pattern, bool caseSensitive)
+        private static bool IsStringMatching(string source, string pattern, bool caseSensitive)
         {
             if (pattern.Contains("*"))
             {
@@ -50,12 +50,12 @@ namespace PSNativeAutomation
             return true;
         }
 
-        private static bool isMatchingCondition(AutomationElement element, GetBaseControlCommand command)
+        private static bool IsMatchingCondition(AutomationElement element, GetControlBase command)
         {
             // ---- Name ----
             if (!String.IsNullOrEmpty(command.Name))
             {
-                if (!isStringMatching(element.Current.Name, command.Name, command.CaseSensitive))
+                if (!IsStringMatching(element.Current.Name, command.Name, command.CaseSensitive))
                 {
                     return false;
                 }
@@ -64,7 +64,7 @@ namespace PSNativeAutomation
             // ---- Automation ID ----
             if (!String.IsNullOrEmpty(command.AutomationId))
             {
-                if (!isStringMatching(element.Current.AutomationId, command.AutomationId, command.CaseSensitive))
+                if (!IsStringMatching(element.Current.AutomationId, command.AutomationId, command.CaseSensitive))
                 {
                     return false;
                 }
@@ -73,7 +73,7 @@ namespace PSNativeAutomation
             // ---- Class ----
             if (!String.IsNullOrEmpty(command.Class))
             {
-                if (!isStringMatching(element.Current.ClassName, command.Class, command.CaseSensitive))
+                if (!IsStringMatching(element.Current.ClassName, command.Class, command.CaseSensitive))
                 {
                     return false;
                 }
@@ -88,9 +88,8 @@ namespace PSNativeAutomation
                 }
             }
 
-            if (command is GetWindowCommand)
+            if (command is GetWindowCommand windowCommand)
             {
-                var windowCommand= (GetWindowCommand)command;
 
                 // ---- Process Name ----
                 if (!String.IsNullOrEmpty(windowCommand.ProcessName))
@@ -106,7 +105,7 @@ namespace PSNativeAutomation
                         return false;
                     }
 
-                    if (!isStringMatching(processName, windowCommand.ProcessName, windowCommand.CaseSensitive))
+                    if (!IsStringMatching(processName, windowCommand.ProcessName, windowCommand.CaseSensitive))
                     {
                         return false;
                     }
@@ -124,18 +123,13 @@ namespace PSNativeAutomation
             }
 
             // ---- Value ----
-
-            if (command is GetControlCommand)
+            if (command is GetControlCommand controlCommand)
             {
-                var controlCommand = (GetControlCommand)command;
-                
                 if (!String.IsNullOrEmpty(controlCommand.Value))
                 {
-                    var valuePattern = element.GetCurrentPattern(ValuePattern.Pattern) as ValuePattern;
-
-                    if (valuePattern != null)
+                    if (element.GetCurrentPattern(ValuePattern.Pattern) is ValuePattern valuePattern)
                     {
-                        if (!isStringMatching(valuePattern.Current.Value, controlCommand.Value, controlCommand.CaseSensitive))
+                        if (!IsStringMatching(valuePattern.Current.Value, controlCommand.Value, controlCommand.CaseSensitive))
                         {
                             return false;
                         }
@@ -146,14 +140,14 @@ namespace PSNativeAutomation
             return true;
         }
 
-        private static List<AutomationElement> findElements(AutomationElement root, GetBaseControlCommand command)
+        private static List<AutomationElement> FindElements(AutomationElement root, GetControlBase command)
         {
             var newElements = new List<AutomationElement>();
             var objectElements = root.FindAll(TreeScope.Children, Condition.TrueCondition);
             
             foreach (AutomationElement element in objectElements)
             {
-                if (isMatchingCondition(element, command))
+                if (IsMatchingCondition(element, command))
                 {
                     newElements.Add(element);
 
@@ -165,7 +159,7 @@ namespace PSNativeAutomation
 
                 if (command.Scope == TreeScope.Descendants)
                 {
-                    var recurElems = findElements(element, command);
+                    var recurElems = FindElements(element, command);
                     if (recurElems != null && recurElems.Count != 0)
                     {
                         newElements.AddRange(recurElems);
@@ -176,9 +170,9 @@ namespace PSNativeAutomation
             return newElements;
         }
 
-        public static List<AutomationElement> FindControls(GetBaseControlCommand command)
+        public static List<AutomationElement> FindControls(GetControlBase command)
         {
-            return findElements(command.Parent, command);
+            return FindElements(command.Parent, command);
         }
     }
 }

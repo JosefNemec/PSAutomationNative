@@ -8,15 +8,15 @@ using System.Windows.Automation;
 
 namespace PSNativeAutomation.Commands
 {
-    [Cmdlet(VerbsLifecycle.Invoke, "UIInvokePattern")]
-    public class InvokeInvokePatternCommand : ControlActionBase
+    [Cmdlet(VerbsCommon.Set, "UIToggleState")]
+    public class SetToggleCommand : ControlActionBase
     {
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
 
-            var pattern = Element.GetCurrentPattern(InvokePattern.Pattern) as InvokePattern;
-            pattern.Invoke();
+            var pattern = Element.GetCurrentPattern(TogglePattern.Pattern) as TogglePattern;
+            pattern.Toggle();
         }
     }
 }

@@ -8,15 +8,15 @@ using System.Windows.Automation;
 
 namespace PSNativeAutomation.Commands
 {
-    [Cmdlet(VerbsLifecycle.Invoke, "UIInvokePattern")]
-    public class InvokeInvokePatternCommand : ControlActionBase
+    [Cmdlet(VerbsCommon.Get, "UIWindowState")]
+    public class GetWindowState : ControlActionBase
     {
         protected override void ProcessRecord()
         {
             base.ProcessRecord();
 
-            var pattern = Element.GetCurrentPattern(InvokePattern.Pattern) as InvokePattern;
-            pattern.Invoke();
+            var windowPattern = Element.GetCurrentPattern(WindowPattern.Pattern) as WindowPattern;
+            WriteObject(windowPattern.Current.WindowVisualState);
         }
     }
 }
