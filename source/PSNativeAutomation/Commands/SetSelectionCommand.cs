@@ -24,7 +24,7 @@ namespace PSNativeAutomation.Commands
 
             var pattern = Element.GetCurrentPattern(SelectionItemPattern.Pattern) as SelectionItemPattern;
 
-            if (Add)
+            if (Add.IsPresent)
             {
                 pattern.AddToSelection();
             }

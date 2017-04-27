@@ -27,7 +27,7 @@ namespace PSNativeAutomation.Commands
         public TreeScope Scope
         {
             get; set;
-        }
+        } = TreeScope.Descendants;
 
         [Parameter()]
         public SwitchParameter First

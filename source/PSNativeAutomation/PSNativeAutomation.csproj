@@ -50,6 +50,8 @@
     <Compile Include="Commands\GetControlBase.cs" />
     <Compile Include="Commands\GetControlCommand.cs" />
     <Compile Include="Commands\GetDesktopCommand.cs" />
+    <Compile Include="Commands\GetEnabledStateCommand.cs" />
+    <Compile Include="Commands\GetSelectionStateCommand.cs" />
     <Compile Include="Commands\GetToggleStateCommand.cs" />
     <Compile Include="Commands\GetValueCommand.cs" />
     <Compile Include="Commands\GetWindowCommand.cs" />

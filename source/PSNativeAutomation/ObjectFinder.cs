@@ -55,7 +55,7 @@ namespace PSNativeAutomation
             // ---- Name ----
             if (!String.IsNullOrEmpty(command.Name))
             {
-                if (!IsStringMatching(element.Current.Name, command.Name, command.CaseSensitive))
+                if (!IsStringMatching(element.Current.Name, command.Name, command.CaseSensitive.IsPresent))
                 {
                     return false;
                 }
@@ -64,7 +64,7 @@ namespace PSNativeAutomation
             // ---- Automation ID ----
             if (!String.IsNullOrEmpty(command.AutomationId))
             {
-                if (!IsStringMatching(element.Current.AutomationId, command.AutomationId, command.CaseSensitive))
+                if (!IsStringMatching(element.Current.AutomationId, command.AutomationId, command.CaseSensitive.IsPresent))
                 {
                     return false;
                 }
@@ -73,7 +73,7 @@ namespace PSNativeAutomation
             // ---- Class ----
             if (!String.IsNullOrEmpty(command.Class))
             {
-                if (!IsStringMatching(element.Current.ClassName, command.Class, command.CaseSensitive))
+                if (!IsStringMatching(element.Current.ClassName, command.Class, command.CaseSensitive.IsPresent))
                 {
                     return false;
                 }
@@ -81,8 +81,8 @@ namespace PSNativeAutomation
 
             // ---- Control Type ----
             if (!String.IsNullOrEmpty(command.ControlType))
-            {
-                if (element.Current.ControlType.LocalizedControlType != command.ControlType)
+            {                
+                if (!IsStringMatching(element.Current.ControlType.LocalizedControlType, command.ControlType, command.CaseSensitive.IsPresent))
                 {
                     return false;
                 }
@@ -105,7 +105,7 @@ namespace PSNativeAutomation
                         return false;
                     }
 
-                    if (!IsStringMatching(processName, windowCommand.ProcessName, windowCommand.CaseSensitive))
+                    if (!IsStringMatching(processName, windowCommand.ProcessName, windowCommand.CaseSensitive.IsPresent))
                     {
                         return false;
                     }
@@ -129,7 +129,7 @@ namespace PSNativeAutomation
                 {
                     if (element.GetCurrentPattern(ValuePattern.Pattern) is ValuePattern valuePattern)
                     {
-                        if (!IsStringMatching(valuePattern.Current.Value, controlCommand.Value, controlCommand.CaseSensitive))
+                        if (!IsStringMatching(valuePattern.Current.Value, controlCommand.Value, controlCommand.CaseSensitive.IsPresent))
                         {
                             return false;
                         }
@@ -151,7 +151,7 @@ namespace PSNativeAutomation
                 {
                     newElements.Add(element);
 
-                    if (command.First)
+                    if (command.First.IsPresent)
                     {
                         return newElements;
                     }

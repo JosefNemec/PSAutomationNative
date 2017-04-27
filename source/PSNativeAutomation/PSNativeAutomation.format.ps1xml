@@ -16,6 +16,9 @@
             <Label>ControlType</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Class</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AutoID</Label>
           </TableColumnHeader>
         </TableHeaders>
@@ -27,6 +30,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <ScriptBlock>$_.Current.LocalizedControlType</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.Current.ClassName</ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
                 <ScriptBlock>$_.Current.AutomationId</ScriptBlock>

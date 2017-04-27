@@ -12,6 +12,7 @@ namespace PSNativeAutomation.Commands
     public class SetValueCommand : ControlActionBase
     {
         [Parameter(Mandatory = true, Position = 0)]
+        [AllowEmptyString]
         public string Value
         {
             get; set;

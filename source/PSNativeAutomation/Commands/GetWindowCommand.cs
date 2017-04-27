@@ -27,11 +27,10 @@ namespace PSNativeAutomation.Commands
         public uint PID
         {
             get; set;
-        }
+        } = uint.MaxValue;
 
         public GetWindowCommand()
         {
-            PID = uint.MaxValue;
             ControlType = "window";
         }
 
@@ -46,6 +45,11 @@ namespace PSNativeAutomation.Commands
 
             try
             {
+                if (Parent == AutomationElement.RootElement)
+                {
+                    Scope = TreeScope.Children;
+                }
+
                 var controls = ObjectFinder.FindControls(this);
 
                 if (controls.Count != 0)

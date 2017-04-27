@@ -78,7 +78,7 @@ namespace PSNativeAutomation.Commands
 
             var handle = (IntPtr)Element.Current.NativeWindowHandle;
 
-            if (Ctrl)
+            if (Ctrl.IsPresent)
             {
                 var keyInput = new INPUT()
                 {
@@ -90,7 +90,7 @@ namespace PSNativeAutomation.Commands
                 NativeMethods.SendInput(1, ref keyInput, Marshal.SizeOf(new INPUT()));
             }
 
-            if (Shift)
+            if (Shift.IsPresent)
             {
                 var keyInput = new INPUT()
                 {
@@ -102,7 +102,7 @@ namespace PSNativeAutomation.Commands
                 NativeMethods.SendInput(1, ref keyInput, Marshal.SizeOf(new INPUT()));
             }
 
-            if (Alt)
+            if (Alt.IsPresent)
             {
                 var keyInput = new INPUT()
                 {
@@ -130,7 +130,7 @@ namespace PSNativeAutomation.Commands
                 // TODO: log this
             }
 
-            if (Alternative)
+            if (Alternative.IsPresent)
             {
                 INPUT mouseInput = new INPUT()
                 {
@@ -148,21 +148,21 @@ namespace PSNativeAutomation.Commands
                 mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE;
                 NativeMethods.SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
 
-                if (RightClick)
+                if (RightClick.IsPresent)
                 {
                     mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_RIGHTDOWN;
                     NativeMethods.SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
                     mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_RIGHTUP;
                     NativeMethods.SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
                 }
-                else if (MiddleClick)
+                else if (MiddleClick.IsPresent)
                 {
                     mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MIDDLEDOWN;
                     NativeMethods.SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
                     mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MIDDLEUP;
                     NativeMethods.SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
                 }
-                else if (DoubleClick)
+                else if (DoubleClick.IsPresent)
                 {
                     mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTDOWN;
                     NativeMethods.SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
@@ -186,17 +186,17 @@ namespace PSNativeAutomation.Commands
                 Cursor.Position = new Point((0), (0));
                 Cursor.Position = new Point(((int)Element.Current.BoundingRectangle.Left + XOffset), ((int)Element.Current.BoundingRectangle.Top + YOffset));
 
-                if (RightClick)
+                if (RightClick.IsPresent)
                 {
                     NativeMethods.mouse_event((int)MouseEventFlags.MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
                     NativeMethods.mouse_event((int)MouseEventFlags.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
                 }
-                else if (MiddleClick)
+                else if (MiddleClick.IsPresent)
                 {
                     NativeMethods.mouse_event((int)MouseEventFlags.MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, 0);
                     NativeMethods.mouse_event((int)MouseEventFlags.MOUSEEVENTF_MIDDLEUP, 0, 0, 0, 0);
                 }
-                else if (DoubleClick)
+                else if (DoubleClick.IsPresent)
                 {
                     NativeMethods.mouse_event((int)MouseEventFlags.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                     NativeMethods.mouse_event((int)MouseEventFlags.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
@@ -210,7 +210,7 @@ namespace PSNativeAutomation.Commands
                 }
             }
 
-            if (Ctrl)
+            if (Ctrl.IsPresent)
             {
                 var keyInput = new INPUT()
                 {
@@ -223,7 +223,7 @@ namespace PSNativeAutomation.Commands
                 NativeMethods.SendInput(1, ref keyInput, Marshal.SizeOf(new INPUT()));
             }
 
-            if (Shift)
+            if (Shift.IsPresent)
             {
                 var keyInput = new INPUT()
                 {
@@ -236,7 +236,7 @@ namespace PSNativeAutomation.Commands
                 NativeMethods.SendInput(1, ref keyInput, Marshal.SizeOf(new INPUT()));
             }
 
-            if (Alt)
+            if (Alt.IsPresent)
             {
                 var keyInput = new INPUT()
                 {
