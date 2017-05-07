@@ -47,6 +47,16 @@ class UIObject
        $this.GetNativeObject() | Invoke-UIClick -XOffset $XOffset -YOffset $YOffset
     }
 
+    [void]ClickDouble()
+    {
+        $this.ClickDouble(10, 10)
+    }
+
+    [void]ClickDouble([int]$XOffset, [int]$YOffset)
+    {
+       $this.GetNativeObject() | Invoke-UIClick -XOffset $XOffset -YOffset $YOffset -DoubleClick
+    }
+
     [void]ClickRight()
     {
         $this.ClickRight(10, 10)
@@ -124,7 +134,12 @@ class UIObject
 
     [string]GetName()
     {
-        return ($this.GetNativeObject()).Current.Name
+        return $this.GetNativeObject().Current.Name
+    }
+
+    [string]GetHelpText()
+    {
+        return $this.GetNativeObject().Current.HelpText
     }
 
     [object]GetObject()
@@ -135,6 +150,46 @@ class UIObject
     [bool]GetEnabledState()
     {
         return $this.GetNativeObject() | Get-UIEnabledState
+    }
+
+    [void]WaitForObjectVisible([int]$Milliseconds)
+    {
+        $watch = New-Object "System.Diagnostics.Stopwatch"
+        $watch.Start()
+        $result = $null
+
+        try
+        {
+            while ($watch.ElapsedMilliseconds -lt $Milliseconds)
+            {                
+                $result = $false
+
+                try
+                {
+                    $obj = $this.GetNativeObject()
+                    if (-not $obj.Current.IsOffscreen)
+                    {
+                        $watch.Stop()
+                        return
+                    }
+                }
+                catch
+                {
+                    $result = $false
+                }
+
+                Start-Sleep -Milliseconds 250
+            }
+        }
+        finally
+        {
+            $watch.Stop()
+        }
+
+        if (-not $result)
+        {
+            throw "Object {0} wasn't found or didn't became visible in {1} ms." -f $this.Name, $Milliseconds
+        }
     }
 
     [void]WaitForObject([int]$Milliseconds)
@@ -175,7 +230,7 @@ class UIObject
 
         if (-not $result)
         {
-            throw "Couldn't find object {0} failed in {1} ms." -f $this.Name, $this.DefaultTimeout
+            throw "Couldn't find object {0} failed in {1} ms." -f $this.Name, $Milliseconds
         }
 
         if ($ReturnObject)
@@ -194,6 +249,18 @@ class UIObject
         {
             & $this.ScriptReference | Out-Null
             return $true
+        }
+        catch
+        {
+            return $false
+        }
+    }
+
+    [bool]IsVisible()
+    {
+        try
+        {
+            return -not $this.GetNativeObject().Current.IsOffscreen
         }
         catch
         {
@@ -232,6 +299,12 @@ class ListBox : UIObject
     [void]SelectItem([string]$Name, [bool]$AddToSelection)
     {
         $this.GetNativeObject() | Get-UIListBoxItem -Name $Name | Set-UISelection -Add:$AddToSelection
+    }
+
+    [UIObject]GetItem([string]$Name)
+    {
+        $obj = $this.GetNativeObject() | Get-UIListBoxItem -Name $Name -First
+        return [UIObject]::New($obj)
     }
 
     [object]GetItems()

@@ -204,4 +204,13 @@ namespace PSNativeAutomation.Commands
             Class = "TabItem";
         }
     }
+
+    [Cmdlet(VerbsCommon.Get, "UIText")]
+    public class GetTextCommand : GetControlCommand
+    {
+        public GetTextCommand()
+        {
+            Class = "Text";
+        }
+    }
 }

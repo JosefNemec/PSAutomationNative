@@ -17,7 +17,7 @@ if (!$SkipBuild)
     }
 
     $solutionDir = Join-Path $pwd "..\source"
-    $msbuildPath = "c:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe";
+    $msbuildPath = "c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe";
     $arguments = "build.xml /p:SolutionDir=`"$solutionDir`" /p:OutputPath=`"$outputPath`";Configuration=$configuration /property:Platform=AnyCPU /t:Build";
     $compiler = Start-Process $msbuildPath $arguments -PassThru -NoNewWindow
     $handle = $compiler.Handle # cache proc.Handle http://stackoverflow.com/a/23797762/1479211

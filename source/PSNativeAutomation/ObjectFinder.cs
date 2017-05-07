@@ -82,7 +82,7 @@ namespace PSNativeAutomation
             // ---- Control Type ----
             if (!String.IsNullOrEmpty(command.ControlType))
             {                
-                if (!IsStringMatching(element.Current.ControlType.LocalizedControlType, command.ControlType, command.CaseSensitive.IsPresent))
+                if (!IsStringMatching(element.Current.LocalizedControlType, command.ControlType, command.CaseSensitive.IsPresent))
                 {
                     return false;
                 }
@@ -90,7 +90,6 @@ namespace PSNativeAutomation
 
             if (command is GetWindowCommand windowCommand)
             {
-
                 // ---- Process Name ----
                 if (!String.IsNullOrEmpty(windowCommand.ProcessName))
                 {
